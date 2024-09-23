@@ -14,6 +14,8 @@ import java.util.List;
  * the country code "can" to several languages.
  */
 public class InLabByHandTranslator implements Translator {
+    public static final String CANADA = "can";
+
     /**
      * Returns the language abbreviations for all languages whose translations are
      * available for the given country.
@@ -23,15 +25,11 @@ public class InLabByHandTranslator implements Translator {
      */
     @Override
     public List<String> getCountryLanguages(String country) {
-        // TODO Checkstyle: The String "can" appears 4 times in the file.
         if (CANADA.equals(country)) {
             return new ArrayList<>(List.of("de", "en", "zh"));
         }
         return new ArrayList<>();
     }
-
-    // TODO Checkstyle: Static variable definition in wrong order.
-    public static final String CANADA = "can";
 
     /**
      * Returns the country abbreviations for all countries whose translations are
@@ -58,17 +56,16 @@ public class InLabByHandTranslator implements Translator {
         if (!country.equals(CANADA)) {
             return null;
         }
-        if (language.equals("de")) {
-            return "Kanada";
+        String translation = null;
+        if ("de".equals(language)) {
+            translation = "Kanada";
         }
-        else if (language.equals("en")) {
-            return "Canada";
+        else if ("en".equals(language)) {
+            translation = "Canada";
         }
         else if ("zh".equals(language)) {
-            return "加拿大";
+            translation = "加拿大";
         }
-        else {
-            return null;
-        }
+        return translation;
     }
 }
