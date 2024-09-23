@@ -12,8 +12,10 @@ import java.util.Map;
  * This class provides the service of converting language codes to their names.
  */
 public class LanguageCodeConverter {
-
-    // TODO Task: pick appropriate instance variables to store the data necessary for this class
+    private int numLanguages;
+    private String languageCode;
+    private String languageName;
+    // Task: pick appropriate instance variables to store the data necessary for this class
 
     /**
      * Default constructor which will load the language codes from "language-codes.txt"
