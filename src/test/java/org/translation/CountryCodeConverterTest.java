@@ -19,12 +19,6 @@ public class CountryCodeConverterTest {
     }
 
     @Test
-    public void getNumCountries() {
-        CountryCodeConverter converter = new CountryCodeConverter();
-        assertEquals(249, converter.getNumCountries());
-    }
-
-    @Test
     public void fromCountryCodeAllLoaded() {
         CountryCodeConverter converter = new CountryCodeConverter();
         assertEquals(249, converter.getNumCountries());

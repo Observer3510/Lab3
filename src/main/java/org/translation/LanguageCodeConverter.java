@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +13,8 @@ import java.util.Map;
  * This class provides the service of converting language codes to their names.
  */
 public class LanguageCodeConverter {
-    private int numLanguages;
-    private List<String> languageCode;
-    private List<String> languageName;
-    // Task: pick appropriate instance variables to store the data necessary for this class
+    private final Map<String, String> langToCode = new HashMap<>();
+    private final Map<String, String> codeToLang = new HashMap<>();
 
     /**
      * Default constructor which will load the language codes from "language-codes.txt"
@@ -36,18 +35,15 @@ public class LanguageCodeConverter {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
 
-            //  Task: use lines to populate the instance variable
-            //           tip: you might find it convenient to create an iterator using lines.iterator()
-            // remove the header
-            lines.remove(0);
-            this.numLanguages = lines.size();
+//            Note that the first line is skipped, i != 0
+            for (int i = 1; i < lines.size(); i++) {
+                String[] lineArray = lines.get(i).split("\t");
 
-            String[] lineContent;
-            for (String line : lines) {
-                lineContent = line.split("\t");
-                this.languageCode.add(lineContent[1]);
-                this.languageName.add(lineContent[0]);
+                String lang = lineArray[0];
+                String code = lineArray[1];
 
+                this.langToCode.put(lang, code);
+                this.codeToLang.put(code, lang);
             }
         }
         catch (IOException | URISyntaxException ex) {
@@ -62,9 +58,7 @@ public class LanguageCodeConverter {
      * @return the name of the language corresponding to the code
      */
     public String fromLanguageCode(String code) {
-        int nameIndex = this.languageCode.indexOf(code);
-        //  Task: update this code to use your instance variable to return the correct value
-        return this.languageName.get(nameIndex);
+        return this.codeToLang.get(code);
     }
 
     /**
@@ -73,9 +67,7 @@ public class LanguageCodeConverter {
      * @return the 2-letter code of the language
      */
     public String fromLanguage(String language) {
-        int codeIndex = this.languageName.indexOf(language);
-        //  Task: update this code to use your instance variable to return the correct value
-        return this.languageCode.get(codeIndex);
+        return this.langToCode.get(language);
     }
 
     /**
@@ -83,7 +75,6 @@ public class LanguageCodeConverter {
      * @return how many languages are included in this code converter.
      */
     public int getNumLanguages() {
-        // Task: update this code to use your instance variable to return the correct value
-        return this.numLanguages;
+        return this.codeToLang.size();
     }
 }
