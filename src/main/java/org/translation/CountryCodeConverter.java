@@ -34,7 +34,7 @@ public class CountryCodeConverter {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
 
-//            Note that the first line is skipped, i != 0
+            // Note that the first line is skipped, i != 0
             for (int i = 1; i < lines.size(); i++) {
                 String[] lineArray = lines.get(i).split("\t");
 
