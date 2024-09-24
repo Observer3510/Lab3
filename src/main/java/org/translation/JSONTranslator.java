@@ -15,6 +15,10 @@ import org.json.JSONArray;
  */
 public class JSONTranslator implements Translator {
 
+    private final JSONArray jsonArray;
+    private final List<String> countries = new ArrayList<>();
+    private final List<String> languages = new ArrayList<>();
+
     // TODO Task: pick appropriate instance variables for this class
 
     /**
@@ -35,7 +39,11 @@ public class JSONTranslator implements Translator {
 
             String jsonString = Files.readString(Paths.get(getClass().getClassLoader().getResource(filename).toURI()));
 
-            JSONArray jsonArray = new JSONArray(jsonString);
+            this.jsonArray = new JSONArray(jsonString);
+
+            for (int i = 0; i < this.jsonArray.length(); i++) {
+                assert false;
+            }
 
             // TODO Task: use the data in the jsonArray to populate your instance variables
             //            Note: this will likely be one of the most substantial pieces of code you write in this lab.
@@ -48,21 +56,21 @@ public class JSONTranslator implements Translator {
 
     @Override
     public List<String> getCountryLanguages(String country) {
-        // TODO Task: return an appropriate list of language codes,
+        // TO_DO Task: return an appropriate list of language codes,
         //            but make sure there is no aliasing to a mutable object
-        return new ArrayList<>();
+        return new ArrayList<>(this.languages);
     }
 
     @Override
     public List<String> getCountries() {
-        // TODO Task: return an appropriate list of country codes,
+        // TO_DO Task: return an appropriate list of country codes,
         //            but make sure there is no aliasing to a mutable object
-        return new ArrayList<>();
+        return new ArrayList<>(this.countries);
     }
 
     @Override
     public String translate(String country, String language) {
-        // TODO Task: complete this method using your instance variables as needed
+        // TO_DO Task: complete this method using your instance variables as needed
         return null;
     }
 }
