@@ -13,6 +13,18 @@ public class CountryCodeConverterTest {
     }
 
     @Test
+    public void fromCountryUSA() {
+        CountryCodeConverter converter = new CountryCodeConverter();
+        assertEquals("usa", converter.fromCountry("United States of America (the)"));
+    }
+
+    @Test
+    public void getNumCountries() {
+        CountryCodeConverter converter = new CountryCodeConverter();
+        assertEquals(249, converter.getNumCountries());
+    }
+
+    @Test
     public void fromCountryCodeAllLoaded() {
         CountryCodeConverter converter = new CountryCodeConverter();
         assertEquals(249, converter.getNumCountries());

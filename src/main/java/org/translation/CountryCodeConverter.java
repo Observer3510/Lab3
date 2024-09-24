@@ -12,8 +12,8 @@ import java.util.Map;
  * This class provides the service of converting country codes to their names.
  */
 public class CountryCodeConverter {
-
-    // TODO Task: pick appropriate instance variable(s) to store the data necessary for this class
+    private final Map<String, String> countryToAlpha3 = new HashMap<>();
+    private final Map<String, String> alpha3ToCountry = new HashMap<>();
 
     /**
      * Default constructor which will load the country codes from "country-codes.txt"
@@ -34,8 +34,16 @@ public class CountryCodeConverter {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
 
-            // TODO Task: use lines to populate the instance variable(s)
+//            Note that the first line is skipped, i != 0
+            for (int i = 1; i < lines.size(); i++) {
+                String[] lineArray = lines.get(i).split("\t");
 
+                String country = lineArray[0];
+                String alpha3 = lineArray[2].toLowerCase();
+
+                countryToAlpha3.put(country, alpha3);
+                alpha3ToCountry.put(alpha3, country);
+            }
         }
         catch (IOException | URISyntaxException ex) {
             throw new RuntimeException(ex);
@@ -49,8 +57,7 @@ public class CountryCodeConverter {
      * @return the name of the country corresponding to the code
      */
     public String fromCountryCode(String code) {
-        // TODO Task: update this code to use an instance variable to return the correct value
-        return code;
+        return alpha3ToCountry.get(code);
     }
 
     /**
@@ -59,8 +66,7 @@ public class CountryCodeConverter {
      * @return the 3-letter code of the country
      */
     public String fromCountry(String country) {
-        // TODO Task: update this code to use an instance variable to return the correct value
-        return country;
+        return countryToAlpha3.get(country);
     }
 
     /**
@@ -68,7 +74,6 @@ public class CountryCodeConverter {
      * @return how many countries are included in this code converter.
      */
     public int getNumCountries() {
-        // TODO Task: update this code to use an instance variable to return the correct value
-        return 0;
+        return countryToAlpha3.size();
     }
 }
