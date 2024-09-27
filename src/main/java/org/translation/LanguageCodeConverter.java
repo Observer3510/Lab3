@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class LanguageCodeConverter {
             List<String> lines = Files.readAllLines(Paths.get(getClass()
                     .getClassLoader().getResource(filename).toURI()));
 
-//            Note that the first line is skipped, i != 0
+            // Note that the first line is skipped, i != 0
             for (int i = 1; i < lines.size(); i++) {
                 String[] lineArray = lines.get(i).split("\t");
 
